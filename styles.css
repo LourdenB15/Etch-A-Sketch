@@ -16,12 +16,23 @@ h1 {
 .left {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     text-align: center;
+    margin-top: 20px;
 }
 
 .right {
+    display: flex;
+    flex-wrap: wrap;
     width: 500px;
     height: 500px;
     background-color: rgb(66, 217, 255);
+}
+
+.inSq {
+    box-sizing: border-box;
+    border: 1px solid black;
+    flex-grow: 1;
+    width: 7.8125px;
+    height: 7.8125px;
 }
