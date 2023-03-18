@@ -15,8 +15,15 @@ window.addEventListener('load', (e) => {
             c.style.width = boxMeasure;
             c.style.height = boxMeasure;
             r.appendChild(c);
+
         }
         right.appendChild(r)
+        const sqs = document.getElementsByClassName('inSq');
+        for (let i = 0; i < sqs.length; i++) {
+            sqs[i].addEventListener('mouseover', () => {
+                sqs[i].style.backgroundColor = 'black';
+            })
+        }
     }
 });
 
@@ -37,9 +44,14 @@ range.addEventListener('change', () => {
             c.style.width = boxMeasure;
             c.style.height = boxMeasure;
             r.appendChild(c);
+
         }
         right.appendChild(r)
+        const sqs = document.getElementsByClassName('inSq');
+        for (let i = 0; i < sqs.length; i++) {
+            sqs[i].addEventListener('mouseover', () => {
+                sqs[i].style.backgroundColor = 'black';
+            })
+        }
     }
 });
-
-
