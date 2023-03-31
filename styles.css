@@ -1,7 +1,20 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     width: 100vw;
     height: 100vh;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+
+section {
+    padding: 20px 10%;
+    flex-grow: 1;
 }
 
 h1 {
@@ -13,26 +26,57 @@ h1 {
     justify-content: space-around;
 }
 
-.left {
+/* //////left////// */
+
+.left-items-wrapper {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
+    align-items: center;
     text-align: center;
+    width: 200px;
+    /* height: 400px; */
+}
+
+.marker-wrapper {
+    margin-bottom: 20px;
+}
+
+.btn {
+    border: 2px solid black;
+    height: 25px;
+    width: 125px;
+    cursor: pointer;
     margin-top: 20px;
 }
 
-.right {
-    display: flex;
-    flex-wrap: wrap;
-    width: 500px;
-    height: 500px;
-    background-color: rgb(66, 217, 255);
+.btn:active {
+    transform: scale(0.9);
+    /* background-color: rgb(175, 175, 175); */
 }
 
-.inSq {
-    box-sizing: border-box;
+.clear.btn:active {
+    transform: scale(0.9);
+    background-color: rgb(175, 175, 175);
+}
+
+.btn.active {
+    background-color: rgb(175, 175, 175);
+}
+
+.toggle-grid {
     border: 1px solid black;
-    flex-grow: 1;
-    width: 7.8125px;
-    height: 7.8125px;
+}
+
+
+
+
+/* //////right////// */
+.board {
+
+    display: flex;
+    border: 5px solid black;
+    width: 500px;
+    height: 500px;
+    background-color: rgb(255, 255, 255);
 }

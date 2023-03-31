@@ -10,24 +10,37 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="app.js" defer></script>
 </head>
 
 <body>
-    <h1>Etch A Sketch</h1>
-    <div class="container">
-        <div class="left">
-            <input type="range" min="16" max="64" value="32">
-            <p><span class="dimension">32</span> X <span class="dimension">32</span></p>
-        </div>
-        <div class="right">
+    <section>
+        <div class="container">
+            <div class="left-items-wrapper">
+                <div class="input">
+                    <input type="range" min="16" max="64" value="32" class="range">
+                    <p><span class="text-dimension">32</span> X <span class="text-dimension">32</span></p>
+                </div>
+
+                <div class="marker-wrapper">
+                    <div class="pen btn marker" id="pen">Pen</div>
+                    <div class="randnom btn marker" id="random">Rainbow</div>
+                    <div class="eraser btn marker">Eraser</div>
+                </div>
+
+                <div class="setting">
+                    <div class="clear btn">Clear</div>
+                    <div class="grid btn">Toggle Grid</div>
+                </div>
+
+            </div>
+            <div class="board-side">
+                <h1>Etch-A-Sketch</h1>
+                <div class="board"></div>
+            </div>
 
         </div>
-    </div>
-
-
-
-
-    <script src="app.js"></script>
+    </section>
 </body>
 
 </html>

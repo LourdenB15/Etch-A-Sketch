@@ -1,42 +1,115 @@
-const range = document.querySelector('input');
-const dimension = document.querySelectorAll('.dimension');
-const left = document.querySelector('.left');
-const right = document.querySelector('.right');
-const para = document.querySelector('p');
+const input = document.querySelector('.range');
+const textDimension = document.querySelectorAll('.text-dimension');
+const board = document.querySelector('.board');
+const boardWidth = board.offsetWidth - 10;
+const grid = document.querySelector('.grid');
+const pen = document.querySelector('#pen');
+const random = document.querySelector('#random');
+const eraser = document.querySelector('.eraser');
+const clear = document.querySelector('.clear');
+let color = '';
+let rainbow = false;
 
-window.addEventListener('load', (e) => {
-    boxGenerator();
-});
+window.addEventListener('load', boxGenerator)
+input.addEventListener('change', boxGenerator)
 
-range.addEventListener('change', () => {
-    while (right.lastChild) {
-        right.lastChild.remove();
-    }
-    dimension.forEach((e) => {
-        e.textContent = range.value;
-    });
-    boxGenerator();
-});
 
 function boxGenerator() {
-    const initDimension = range.value;
-    for (let i = 1; i <= initDimension; i++) {
-        const boxMeasure = `${right.offsetWidth / initDimension}px`;
-        const r = document.createElement('div');
-        for (let i = 1; i <= initDimension; i++) {
-            const c = document.createElement('div');
-            c.classList.add('inSq');
-            c.style.width = boxMeasure;
-            c.style.height = boxMeasure;
-            r.appendChild(c);
+    textDimension.forEach(e => {
+        e.textContent = input.value;
+    });
+    board.innerHTML = '';
+    for (let column = 1; column <= input.value; column++) {
+        const Csquare = document.createElement('div');
+        for (let row = 1; row <= input.value; row++) {
+            const Rsquare = document.createElement('div');
+            Rsquare.classList.add('squares');
+            Rsquare.addEventListener('mouseover', backgroundChange)
+            Rsquare.style.cssText = `
+                width: ${boardWidth / input.value}px;
+                height: ${boardWidth / input.value}px;
+                box-sizing: border-box;   
+            `;
+            if (grid.classList.contains('active')) {
+                Rsquare.classList.add('toggle-grid')
+            }
+            Csquare.appendChild(Rsquare);
         }
-        right.appendChild(r)
-        const sqs = document.getElementsByClassName('inSq');
-        for (let i = 0; i < sqs.length; i++) {
+        board.appendChild(Csquare);
+    }
+}
+grid.addEventListener('click', () => {
+    grid.classList.toggle('active');
+    const squares = document.querySelectorAll('.squares')
+    squares.forEach(e => {
+        e.classList.toggle('toggle-grid');
+    })
+});
 
-            sqs[i].addEventListener('mouseover', () => {
-                sqs[i].style.backgroundColor = 'black';
-            });
+
+pen.addEventListener('click', () => {
+    marker()
+    pen.classList.toggle('active');
+    rainbow = false;
+    color = 'black';
+})
+random.addEventListener('click', () => {
+    marker()
+    random.classList.toggle('active');
+    color = '';
+    rainbow = true;
+})
+
+eraser.addEventListener('click', () => {
+    marker()
+    eraser.classList.toggle('active');
+    color = 'white';
+    rainbow = false;
+})
+clear.addEventListener('click', () => {
+    const squares = document.querySelectorAll('.squares')
+    for (let square of squares) {
+        square.style.backgroundColor = 'white'
+    }
+})
+
+
+function backgroundChange() {
+    if (mouseDown) {
+        if (rainbow) {
+            this.style.backgroundColor = `rgb(${Math.floor(Math.random() * 255) + 1}, ${Math.floor(Math.random() * 255) + 1}, ${Math.floor(Math.random() * 255) + 1})`;
+        } else {
+            this.style.backgroundColor = color;
+        }
+    }
+}
+let mouseDown = 0;
+
+document.body.addEventListener('mousedown', (e) => {
+    if (e.which === 1) {
+        mouseDown = 1;
+        if (e.target.classList.contains('squares')) {
+            if (rainbow) {
+                e.target.style.backgroundColor = `rgb(${Math.floor(Math.random() * 255) + 1}, ${Math.floor(Math.random() * 255) + 1}, ${Math.floor(Math.random() * 255) + 1})`;
+            } else {
+                e.target.style.backgroundColor = color;
+            }
+        }
+    }
+})
+document.body.addEventListener('mouseup', (e) => {
+    if (e.which === 1) {
+        mouseDown = 0;
+    }
+})
+
+
+
+function marker() {
+    const markers = document.querySelectorAll('.marker');
+    for (let marker of markers) {
+        if (marker.classList.contains('active')) {
+            marker.classList.remove('active');
         }
     }
 }
